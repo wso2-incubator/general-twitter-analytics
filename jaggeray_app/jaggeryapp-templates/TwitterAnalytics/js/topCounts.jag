@@ -1,0 +1,29 @@
+<%
+    var log=new Log();
+    var Para = request.getContent();
+    var datap = require('../config.json');
+    var db = new Database(datap.pmtdb.databaseurl+datap.pmtdb.databasename, datap.pmtdb.username, datap.pmtdb.password);
+   //log.info(datap);
+//log.info(db);
+try{
+    var result = db.query("SELECT * FROM top where id=1");
+    }catch(e){
+log.error(e.message);
+}finally{
+    db.close();
+}
+
+    var data = [];
+//log.info(result);
+  data.push(Number(result[0].G1_P1));
+  data.push(Number(result[0].G1_P2));
+  data.push(Number(result[0].G1_P1)+Number(result[0].G1_P2));
+
+  data.push(Number(result[0].G2_P1));
+  data.push(Number(result[0].G2_P2));
+  data.push(Number(result[0].G2_P1)+Number(result[0].G2_P2)); 
+//log.info(stringify(data));
+print(stringify(data));
+
+
+%>
