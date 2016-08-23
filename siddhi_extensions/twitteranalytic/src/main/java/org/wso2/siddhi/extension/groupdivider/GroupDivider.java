@@ -2,29 +2,20 @@ package org.wso2.siddhi.extension.groupdivider;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import org.wso2.siddhi.core.config.ExecutionPlanContext;
 import org.wso2.siddhi.core.event.ComplexEventChunk;
 import org.wso2.siddhi.core.event.stream.StreamEvent;
 import org.wso2.siddhi.core.event.stream.StreamEventCloner;
 import org.wso2.siddhi.core.event.stream.populater.ComplexEventPopulater;
+import org.wso2.siddhi.core.executor.ConstantExpressionExecutor;
 import org.wso2.siddhi.core.executor.ExpressionExecutor;
 import org.wso2.siddhi.core.executor.VariableExpressionExecutor;
 import org.wso2.siddhi.core.query.processor.Processor;
 import org.wso2.siddhi.core.query.processor.stream.StreamProcessor;
 import org.wso2.siddhi.query.api.definition.AbstractDefinition;
 import org.wso2.siddhi.query.api.definition.Attribute;
-import org.xml.sax.SAXException;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
@@ -36,7 +27,7 @@ public class GroupDivider extends StreamProcessor {
     private List<String> groupTwoSubGroupOne = new ArrayList<String>();
     private List<String> groupTwoSubGroupTwo = new ArrayList<String>();
     private List<String> groupCommon = new ArrayList<String>();
-    private String group;
+    private String group,g1p1,g1p2,g2p1,g2p2;
 
 
     @Override
@@ -63,7 +54,7 @@ public class GroupDivider extends StreamProcessor {
                     }
 
                     for (String hashTag : groupOneSubGroupOne) {
-                        if (stopTagSet.contains(hashTag)) {
+                        if (stopTagSet.contains(hashTag.toLowerCase())) {
                             if (group == null){
                                 group = "G1_P1";
                                 complexEventPopulater.populateComplexEvent(streamEvent, new Object[]{group});
@@ -71,7 +62,7 @@ public class GroupDivider extends StreamProcessor {
                         }
                     }
                     for (String hashTag : groupOneSubGroupTwo) {
-                        if (stopTagSet.contains(hashTag)) {
+                        if (stopTagSet.contains(hashTag.toLowerCase())) {
                             if (group == null){
                                 group = "G1_P2";
 //                                complexEventPopulater.populateComplexEvent(streamEvent, new Object[]{group});
@@ -83,7 +74,7 @@ public class GroupDivider extends StreamProcessor {
                         }
                     }
                     for (String hashTag : groupTwoSubGroupOne) {
-                        if (stopTagSet.contains(hashTag)) {
+                        if (stopTagSet.contains(hashTag.toLowerCase())) {
                             if (group == null){
                                 group = "G2_P1";
 //                                complexEventPopulater.populateComplexEvent(streamEvent, new Object[]{group});
@@ -95,7 +86,7 @@ public class GroupDivider extends StreamProcessor {
                         }
                     }
                     for (String hashTag : groupTwoSubGroupTwo) {
-                        if (stopTagSet.contains(hashTag)) {
+                        if (stopTagSet.contains(hashTag.toLowerCase())) {
                             if (group == null){
                                 group = "G2_P2";
 //                                complexEventPopulater.populateComplexEvent(streamEvent, new Object[]{group});
@@ -107,7 +98,7 @@ public class GroupDivider extends StreamProcessor {
                         }
                     }
                     for (String hashTag : groupCommon) {
-                        if (stopTagSet.contains(hashTag)) {
+                        if (stopTagSet.contains(hashTag.toLowerCase())) {
                             if (group == null){
                                 group = "COMMON";
 //                                complexEventPopulater.populateComplexEvent(streamEvent, new Object[]{group});
@@ -134,13 +125,42 @@ public class GroupDivider extends StreamProcessor {
 
     @Override
     protected List<Attribute> init(AbstractDefinition abstractDefinition, ExpressionExecutor[] expressionExecutors, ExecutionPlanContext executionPlanContext) {
-        if (!(attributeExpressionExecutors.length == 1)) {
+        if (!(attributeExpressionExecutors.length == 5)) {
             throw new UnsupportedOperationException("Invalid number of Arguments");
         }
         if (!(attributeExpressionExecutors[0] instanceof VariableExpressionExecutor)) {
             throw new UnsupportedOperationException("Required a variable, but found a otherparameter");
         } else {
 //            variableHashTag = (VariableExpressionExecutor) attributeExpressionExecutors[0];
+        }
+
+        if (attributeExpressionExecutors[1] instanceof ConstantExpressionExecutor) {
+
+            g1p1 = ((String) attributeExpressionExecutors[1].execute(null));
+            groupOneSubGroupOne= Arrays.asList(g1p1.split("\\s+"));
+        } else {
+            throw new IllegalArgumentException("Parameter should be a String");
+        }
+        if (attributeExpressionExecutors[2] instanceof ConstantExpressionExecutor) {
+
+            g1p2 = ((String) attributeExpressionExecutors[2].execute(null));
+            groupOneSubGroupTwo=Arrays.asList(g1p2.split("\\s+"));
+        } else {
+            throw new IllegalArgumentException("Parameter should be a String");
+        }
+        if (attributeExpressionExecutors[3] instanceof ConstantExpressionExecutor) {
+
+            g2p1 = ((String) attributeExpressionExecutors[3].execute(null));
+            groupTwoSubGroupOne=Arrays.asList(g2p1.split("\\s+"));
+        } else {
+            throw new IllegalArgumentException("Parameter should be a String");
+        }
+        if (attributeExpressionExecutors[4] instanceof ConstantExpressionExecutor) {
+
+            g2p2 = ((String) attributeExpressionExecutors[4].execute(null));
+            groupTwoSubGroupTwo=Arrays.asList(g2p2.split("\\s+"));
+        } else {
+            throw new IllegalArgumentException("Parameter should be a String");
         }
 
         List<Attribute> attributeList = new ArrayList<Attribute>();
@@ -150,59 +170,6 @@ public class GroupDivider extends StreamProcessor {
 
     @Override
     public void start() {
-        InputStream file = getClass().getResourceAsStream("/htag.xml");
-
-        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder dBuilder = null;
-
-        try {
-            dBuilder = dbFactory.newDocumentBuilder();
-
-            Document doc = dBuilder.parse(file);
-            doc.getDocumentElement().normalize();
-            NodeList groupNodes = doc.getElementsByTagName("group");
-            int count = 0;
-            for (int i = 0; i < 2; i++) {
-                Element subGroupNodes = (Element) groupNodes.item(i);
-                NodeList subGroupList = subGroupNodes.getElementsByTagName("sub-group");
-
-                for (int j = 0; j < subGroupList.getLength(); j++) {
-                    Element subgroups = (Element) subGroupList.item(j);
-//                    System.out.println(subgroups.getAttributes().getNamedItem("name").toString());
-                    NodeList nl = subgroups.getElementsByTagName("hash-tag");
-                    for (int k = 0; k < nl.getLength(); k++) {
-                        switch (count) {
-                            case 0:
-                                groupOneSubGroupOne.add(nl.item(k).getTextContent().toLowerCase());
-                                break;
-                            case 1:
-                                groupOneSubGroupTwo.add(nl.item(k).getTextContent().toLowerCase());
-                                break;
-                            case 2:
-                                groupTwoSubGroupOne.add(nl.item(k).getTextContent().toLowerCase());
-                                break;
-                            case 3:
-                                groupTwoSubGroupTwo.add(nl.item(k).getTextContent().toLowerCase());
-                                break;
-                        }
-                    }
-                    count++;
-                }
-            }
-
-            Element commonGroup = (Element) groupNodes.item(2);
-            NodeList commonHTag = commonGroup.getElementsByTagName("hash-tag");
-            for (int i = 0; i < commonHTag.getLength(); i++) {
-                groupCommon.add(commonHTag.item(i).getTextContent().toLowerCase());
-            }
-
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
