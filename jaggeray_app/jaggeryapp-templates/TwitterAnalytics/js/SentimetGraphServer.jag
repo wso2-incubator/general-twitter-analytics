@@ -1,0 +1,64 @@
+<% 
+
+    var Para = request.getContent();
+    var data = require('../config.json'); 
+    var db = new Database(data.pmtdb.databaseurl+data.pmtdb.databasename, data.pmtdb.username, data.pmtdb.password);
+    var result = db.query("SELECT G1_P1,G1_P2,G2_P1,G2_P2,CDate FROM SentimentRate");    
+    var data = [];
+    var log=new Log();
+    
+    for (var i in result) {
+	var TrNews = db.query("SELECT "+"G1_P1"+" FROM news where CDate="+stringify(result[i].CDate));
+	
+        if(TrNews!= null){
+	var myJson1 = {};
+	myJson1.Date = result[i].CDate;
+	myJson1.Candidate = "G1_P1";
+	myJson1.Rate = result[i]["G1_P1"];
+	myJson1.News1 = TrNews[0]["G1_P1"];
+	myJson1.News2 = TrNews[1]["G1_P1"];
+	myJson1.News3 = TrNews[2]["G1_P1"];
+        data.push(myJson1);
+        }
+
+	var ChNews = db.query("SELECT "+"G1_P2"+" FROM news where CDate="+stringify(result[i].CDate));
+
+        if(ChNews!= null){
+	var myJson3 = {};
+	myJson3.Date = result[i].CDate;
+	myJson3.Candidate = "G1_P2";
+	myJson3.Rate = result[i]["G1_P2"];
+	myJson3.News1 = ChNews[0]["G1_P2"];
+	myJson3.News2 = ChNews[1]["G1_P2"];
+	myJson3.News3 = ChNews[2]["G1_P2"];
+        data.push(myJson3);
+        }
+
+	var ChNews = db.query("SELECT "+"G2_P1"+" FROM news where CDate="+stringify(result[i].CDate));
+         if(ChNews!= null){
+	var myJson4 = {};
+	myJson4.Date = result[i].CDate;	
+	myJson4.Candidate = "G2_P1";
+	myJson4.Rate = result[i]["G2_P1"];
+	myJson4.News1 = ChNews[0]["G2_P1"];
+	myJson4.News2 = ChNews[1]["G2_P1"];
+	myJson4.News3 = ChNews[2]["G2_P1"];
+        data.push(myJson4);
+        }
+
+	var ChNews = db.query("SELECT "+"G2_P2"+" FROM news where CDate="+stringify(result[i].CDate));
+         if(ChNews!= null){
+	var myJson5 = {};
+	myJson5.Date = result[i].CDate;	
+	myJson5.Candidate = "G2_P2";
+	myJson5.Rate = result[i]["G2_P2"];
+	myJson5.News1 = ChNews[0]["G2_P2"];
+	myJson5.News2 = ChNews[1]["G2_P2"];
+	myJson5.News3 = ChNews[2]["G2_P2"];
+        data.push(myJson5);
+        }
+    }
+    db.close();
+	//log.info(data); 
+	print(stringify(data));  
+%>

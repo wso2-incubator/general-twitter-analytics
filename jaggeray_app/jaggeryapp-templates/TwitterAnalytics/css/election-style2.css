@@ -1,0 +1,1312 @@
+body.cElection,
+body {
+    background-image: url("../images/background/twitter_background.jpg");
+    background-repeat: no-repeat;
+    background-position: center 70%;
+    /*            background-size:100%;*/
+    background-attachment: fixed;
+}
+
+body.cElection h1,
+body.cElection h2,
+body.cElection h3,
+body.cBlackSection h1 {
+    font-family: 'Cinzel', serif;
+    text-transform: uppercase;
+}
+
+.cHeader {
+    background: #000000;
+    text-align: left;
+    padding: 0.5em;
+}
+
+.cHeader img {
+    height: 34px;
+}
+
+a:hover {
+    text-decoration: none;
+    border: none;
+}
+
+.row {
+    margin: 0;
+}
+
+.cElection p {
+    font-family: Georgia, Times, Times New Roman, serif;
+    font-size: 1.2em;
+    line-height: 1.4em;
+    /*     font-size: 1.3em;
+     line-height: 1.6em;*/
+}
+
+.cElectionIntro {
+    padding: 6em 0;
+}
+
+.cElectionIntro h1 {
+    font-size: 5.5em;
+    line-height: 0.9em;
+    margin-bottom: 0;
+}
+
+.cElectionIntroRight {
+    font-size: 1.5em;
+}
+
+.cElectionIntroRight p {
+    color: #000000;
+    font-family: "Lora", serif;
+    margin: 0 0 0.4em;
+    padding: 0;
+    font-size: 0.9em;
+    line-height: 1.3em;
+}
+
+p.cRed {
+    font-size: 1.2em;
+    color: #be060d;
+    line-height: 1em;
+    font-style: italic;
+}
+
+p.cBlue {
+    font-size: 1.2em;
+    color: #292f6b;
+    line-height: 1em;
+    font-style: italic;
+}
+
+.cElectionIntroBottom {
+    /*    background-color: rgba(0, 0, 0, 0.5);*/
+    padding: 0 3em 3em;
+}
+
+.cElectionIntroBottom h2 {
+    text-align: center;
+    color: #ffffff;
+}
+
+.cProductInfo {
+    display: inline-block;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 0.8em 0.8em 0.2em;
+/*    margin-bottom: 2em;*/
+    margin-top: 2em;
+}
+
+.cProductInfo p {
+    padding: 0;
+    margin: 0 10px 0 0;
+   /* float: left;*/
+    display: inline-block;
+}
+
+.cProductInfo a {
+    display: inline-block;
+    margin-top: 0%;
+}
+
+.cProductInfo a img {
+    /*    padding: 1em;*/
+    height: 25px;
+    display: inline-block;
+}
+
+.cProductInfo .col-md-3 {
+    text-align: left;
+}
+
+.cProductLogoos {
+    text-align: center;
+}
+
+.cProductLogoos img {
+    margin: 0 0.2em;
+}
+
+.cPartyContainer {
+    padding: 2em;
+    text-align: center;
+}
+
+.cPartyContainer img {
+    border-radius: 50%;
+    margin-bottom: 1em;
+    border: 1px solid #ffffff;
+}
+
+.cNumbers {
+    color: #ffffff;
+    font-family: 'Cinzel', serif;
+    text-transform: uppercase;
+    font-size: 3.4em;
+    line-height: 1.6em;
+    font-weight: bold;
+}
+
+.cDesc {
+    color: #ffffff;
+    font-family: 'Cinzel', serif;
+    text-transform: uppercase;
+    font-size: 1.2em;
+}
+
+.cFirstCandidate img {
+    width: 215px;
+}
+
+.cPartyContainer .cSecondCandidate img {
+    width: 70%;
+}
+
+.cPartyContainer.cRepublican {
+    background-color: rgba(190, 6, 13, 0.8);
+    padding: 1em 0;
+}
+
+.cPartyContainer.cDemocratic {
+    background-color: rgba(30, 38, 114, 0.8);
+    padding: 1em 0;
+}
+
+
+/*///////NEWINTRO//////*/
+
+.cNewIntro {}
+
+.cNewIntro h2 {
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+}
+
+.cNewIntro img {
+    max-width: 150px;
+}
+
+.cHashTagWordCloud span{
+    background: rgba(117, 117, 117, 0) !important;
+    color: #C3BABA !important;
+    font-size: 13px !important;
+}
+
+.cHashTagWordCloud{
+    padding-left: 47px;
+    padding-bottom: 3%;   
+}
+
+.cNewIntro .cHashTags span,
+#cHashTags1 span,
+#cHashTags2 span,
+#cHashTags3 span,
+#cHashTags4 span {
+    background: #000000;
+    color: #ffffff;
+    padding: 0.2em 0.6em;
+    display: inline-block;
+    margin: 0.1em;
+    float: left;
+    font-size: 0.7em;
+}
+
+.cNewIntro h4 {
+    text-align: center;
+    font-size: 1.6em;
+    color: #ffffff;
+    font-family: 'Cinzel', serif;
+    font-weight: normal;
+    margin: 0 0 0.5em 0;
+}
+
+.cIntroSectionLine h5 {
+    text-align: center;
+    font-size: 1em;
+    color: #ffffff;
+    font-family: 'Cinzel', serif;
+    font-weight: normal;
+    margin-bottom: 1em;
+}
+
+.cTrumpCol,
+.cCruzCol,
+.cClintonCol,
+.cBernieCol {
+    padding: 1em;
+    min-height: 520px;
+}
+
+.cTrumpCol {
+    background: rgba(250, 87, 75, 0.4);
+}
+
+.cCruzCol {
+    background: rgba(229, 16, 0, 0.4);
+}
+
+.cClintonCol {
+    background: rgba(62, 194, 238, 0.4);
+}
+
+.cBernieCol {
+    background: rgba(28, 64, 251, 0.4);
+}
+
+.cPartyContainer h3 {
+    font-size: 2em;
+    color: #ffffff;
+    text-align: center;
+    font-weight: normal;
+    text-transform: uppercase;
+    margin: 0 0 0em 0;
+    width: 100%;
+}
+
+.cPartyContainer p {
+    font-family: 'Cinzel', serif !important;
+}
+
+body p.cCandidateName {
+    font-size: 2em;
+    color: #ffffff;
+    padding: 0;
+    line-height: 0.5em;
+    margin: 0 0 1em 0;
+}
+
+body p.cCandidateNumbers {
+    font-size: 4.5em;
+    color: #ffffff;
+    padding: 0;
+    line-height: 0.5em;
+    margin: 0 0 1em 0;
+}
+
+body .cFirstCandidate p.cCandidateNumbers {
+    font-weight: bold;
+}
+
+.row.cWhiteSection {
+    background-image: url("//b.content.wso2.com/sites/all/advantage-page/images/colored-bg.png");
+    background-position: center center;
+    background-repeat: repeat;
+    /*    background-color: rgba(255,255,255,0.7);*/
+}
+
+.row.cWhiteSection.offwhite {
+    /*    background-color: rgba(227,224,217,0.9);*/
+    background-image: url("//b.content.wso2.com/sites/all/us-election/colored-bg-2.png");
+    background-position: center center;
+    background-repeat: repeat;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.row.cWhiteSection.cCommunity {
+    background-image: url("//b.content.wso2.com/sites/all/us-election/community-bg.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.row.cWhiteSection h2 {
+    text-align: center;
+}
+
+.cWhiteSection h3 {
+    text-align: left;
+    font-weight: normal;
+}
+
+.cTwitterContainer {
+    /*    background-color: rgba(0, 0, 0, 0.9);*/
+    background-color: #ffffff;
+    padding: 2em;
+    display: inline-block;
+    width: 100%;
+    /*    max-height: 550px;*/
+    /*    overflow: hidden;*/
+    border: 1px solid #dadada;
+}
+
+.cTitle {
+    text-align: center;
+    width: 100%;
+    font-size: 1.6em;
+    text-transform: uppercase;
+    color: #ffffff;
+    background-color: #a6a6a6;
+    padding: 0.5em;
+    font-family: 'Cinzel', serif;
+    margin-bottom: 0;
+    line-height: 1.1em;
+}
+
+.cTitle.cLive {
+    background-color: #619834;
+    color: #ffffff;
+}
+
+.cArrow {
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.cArrow img {
+    margin-top: -1px;
+}
+
+.cTwitterWidgetContainer {
+    /*    min-height: 1400px;*/
+    /*    border: 1px solid #a6a6a6;*/
+    width: 100%;
+    text-align: center;
+    padding: 0em;
+    /*       max-height: 865px;*/
+    overflow: hidden;
+}
+
+
+/*.timeline-TweetList-tweet.customisable-border , #nt-latest li {
+     background: #ffffff;
+    display: inline-block;
+    height: auto;
+    margin-bottom: 1em;
+    min-height: 328px;
+    border: 1px solid #dadada;
+    border-radius: 5px;
+}
+#nt-latest li, #nt-popular li, #nt-popularElection li {
+    height: auto;
+    padding: 1em;
+}*/
+
+.timeline-TweetList-tweet.customisable-border:hover,
+#nt-latest li:hover,
+li.cTwitterCard:hover {
+    background-color: #d4edff;
+}
+
+.timeline-Tweet:hover {
+    background: transparent;
+}
+
+.timeline-Tweet {
+    display: inline-block;
+}
+
+.twitter-text {
+    font-family: "Lora", serif;
+    font-size: 1em;
+    line-height: 1.4em;
+}
+
+
+/*.retweet-user , .twitter-name , #nt-latest li a, #nt-popular li a, #nt-news li a, #nt-popularElection li a, #nt-popularLink li a {
+    color: rgb(0,172,238);
+     font-family: "Lora",serif;
+}*/
+
+.avatar {
+    margin-left: 0;
+}
+
+.row.cRedSection {
+    background-color: rgba(190, 6, 13, 0.8);
+}
+
+.row.cRedSection h2 {
+    color: #ffffff;
+}
+
+.row.cRedSection p {
+    color: #cbb795;
+}
+
+.row.cBlueSection {
+    background-color: rgba(30, 38, 114, 0.8);
+}
+
+.row.cBlueSection h2 {
+    color: #ffffff;
+    text-align: center;
+}
+
+.row.cBlueSection h3 {
+    /*    text-align: center;*/
+    font-weight: normal;
+    color: #ffffff;
+}
+
+.row.cBlueSection p {
+    color: #cbb795;
+}
+
+.fw-circle {
+    font-size: 1.5em;
+    line-height: 1em;
+}
+
+.community-graph-legend-container {
+    background-color: transparent;
+    text-align: center;
+    padding: 1.5em;
+}
+
+.community-graph-legend {
+    text-align: center;
+}
+
+.cBlackSection {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding-left: 0;
+    padding-right: 0;
+    margin-top: 5%;
+    padding-top: 5%;
+    margin-bottom: 5%;
+    /*    background-image: url("//b.content.wso2.com/sites/all/advantage-page/images/colored-bg.png");
+    background-repeat: repeat;*/
+}
+
+.cBlackSection h2 {
+    color: #ffffff;
+}
+
+.cTxt p {
+    padding: 0;
+    margin: 0;
+    color: #000000;
+    font-size: 1.6em;
+}
+
+.cProductLogos,
+.cTxt {
+    text-align: center;
+    padding: 0.5em;
+}
+
+.WCcontainer {
+    outline: none;
+}
+
+.retweet-user {
+    margin-top: 5px;
+}
+
+.bubble-container {
+    width: 80%;
+    margin-left: 0;
+    padding-left: 1em;
+}
+
+.cWordCloud .marks {
+    /*   width: 80% !important;
+    height: 160px !important;*/
+}
+
+#graph2 {
+    padding-left: 7em;
+    padding-top: 4em;
+}
+
+.cGraph {
+    padding: 2em;
+    outline: none;
+    border: none;
+    background: transparent;
+    position: relative;
+}
+
+#communityGraph svg {
+    width: 100% !important;
+}
+
+body > div.cBlackSection.container > div:nth-child(5) > div.toggle.btn.btn-warning > div > label.btn {
+    font-size: 1.5em;
+}
+
+body > div.cBlackSection.container > div:nth-child(5) > div.toggle.btn.btn-danger.off > div > label.btn {
+    font-size: 1.5em;
+}
+
+ul#nt-popularLink li {
+    background-color: rgba(255, 255, 255, 1);
+    /*    margin-bottom: 3px;*/
+    /*    width: 100%;*/
+    /*    border-radius: 8px;*/
+    margin-right: 5px;
+    margin-left: 5px;
+    width: 32%;
+    height: 200px;
+    word-wrap: break-word;
+    overflow-y: overlay;
+    font-size: 12px;
+}
+
+ul#nt-popularLink li .avatar {
+    background-color: black;
+    height: 6em;
+    width: 6em;
+    border-radius: 50%;
+}
+
+ul#nt-popularLink li .avatar img {
+    border-radius: 0;
+    max-width: 200%;
+    border: none;
+}
+
+.lh b {
+    font-size: 2em;
+}
+
+.cBlackSection h2 {
+    text-align: center;
+}
+
+.cBlackSection p {
+    color: white;
+    vertical-align: top;
+}
+
+.cBlackSection .desc {
+    padding: 30px 100px 12px 100px;
+    text-align: center;
+}
+
+.cBlackSection h3 {
+    color: #E6E2DC;
+    font-weight: normal;
+}
+
+.cWorCloud {
+    /*        background-image: url("//b.content.wso2.com/sites/all/advantage-page/images/colored-bg.png");
+        background-repeat: repeat;*/
+    /* background-color: rgba(255, 255, 255, 0.9);*/
+    padding-bottom: 1em;
+    display: inline-block;
+    width: 100%;
+    padding: 2em;
+}
+
+.cWorCloud img {
+    border-radius: 50%;
+    margin-top: 20%;
+    margin-left: 25%;
+    max-width: 60%;
+}
+
+.cWorCloud .trump img {
+    border: 5px solid #fa574b;
+}
+
+.cWorCloud .clinton img {
+    border: 5px solid #3ec2ee;
+}
+
+.cWorCloud .bernie img {
+    border: 5px solid #1c40fb;
+}
+
+.cWorCloud h2 {
+    color: #404041;
+}
+
+.cWorCloud h3 {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 2em;
+    font-weight: bold;
+    margin-bottom: 3em;
+}
+
+.cWorCloud h3 span {
+    font-size: 2.4em;
+    font-weight: normal;
+}
+
+.cTRUMPCOMMUNITYContainer,
+.cCRUZCOMMUNITYContainer,
+.cCLINTONCOMMUNITYContainer,
+.cBERNIECOMMUNITYContainer {
+    padding: 0em;
+    /*    margin: 1em;*/
+    /*    border: 2px solid #ffffff;*/
+}
+
+.cTRUMPCOMMUNITYContainer h4,
+.cCRUZCOMMUNITYContainer h4,
+.cCLINTONCOMMUNITYContainer h4,
+.cBERNIECOMMUNITYContainer h4 {
+    color: #ffffff;
+    font-size: 1.8em;
+    font-family: 'Cinzel', serif;
+    font-weight: normal;
+    padding-left: 60px;
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: 10%;
+    margin-top: 0;
+    /*  background-color: black;*/
+}
+
+.cTRUMPCOMMUNITYContainer h4 {
+    background-image: url("//b.content.wso2.com/sites/all/us-election/Trump.jpg");
+}
+
+.cCRUZCOMMUNITYContainer h4 {
+    background-image: url("//b.content.wso2.com/sites/all/us-election/Cruz.jpg");
+}
+
+.cCLINTONCOMMUNITYContainer h4 {
+    background-image: url("//b.content.wso2.com/sites/all/us-election/Hillary.jpg");
+}
+
+.cBERNIECOMMUNITYContainer h4 {
+    background-image: url("//b.content.wso2.com/sites/all/us-election/Bernie.jpg");
+}
+
+.cTRUMPCOMMUNITYContainer h4,
+.cCRUZCOMMUNITYContainer h4 {
+    background-color: rgba(190, 6, 13, 0.8);
+}
+
+.cCLINTONCOMMUNITYContainer h4,
+.cBERNIECOMMUNITYContainer h4 {
+    background-color: rgba(30, 38, 114, 0.8);
+}
+
+.WCcontainer {
+    background: transparent;
+}
+
+
+/*//////NEW TWITTER/////*/
+
+.cNewTwitterFeed {
+    display: inline-block;
+    padding-top: 2em;
+    padding-bottom: 2em;
+}
+
+#nt-latest li,
+#nt-popular li,
+#nt-popularElection li {
+    /*    height: auto;*/
+    padding: 1em;
+    /*    width: 100%;*/
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.cTwitterCol {
+    padding-top: 2em;
+}
+
+.cTwitterCol ul {
+    padding: 0;
+    margin: 0;
+}
+
+.cTwitterCol ul li {
+    list-style: none;
+    margin-bottom: 1em;
+}
+
+.cTwitterCard {
+    background: #ffffff;
+    border: 1px solid #d8d8d8;
+    padding: 1em;
+}
+
+.cTwitterCard-header {
+    background-image: url(" //b.content.wso2.com/sites/all/us-election/twitter-icon.svg");
+    background-position: right 25%;
+    background-repeat: no-repeat;
+    background-size: 7% auto;
+    display: inline-block;
+    width: 100%;
+}
+
+.cTwitterCard-body,
+.cTwitterCard-body p {
+    color: #444444;
+    font-size: 1.15em;
+    text-align: left;
+}
+
+.avatar {
+    width: 80px;
+    display: inline-block;
+    float: left;
+    /*        padding: 0 10px 0 0;*/
+}
+
+.avatar img {
+    width: 60px;
+    height: 60px;
+    border-radius: 5px;
+}
+
+.cTwitterInfo {
+    display: inline-block;
+    width: 60%;
+    float: left;
+}
+
+a.cTwitterFullName,
+#nt-latest li a,
+#nt-popular li a,
+#nt-news li a,
+#nt-popularElection li a,
+#nt-popularLink li a {
+    font-weight: bold !important;
+    color: rgb(37, 44, 48);
+    /*        display: block;*/
+}
+
+a.cTwitterUserName {
+    font-weight: normal !important;
+}
+
+.cTwitterCard-Bottom {
+    display: inline-block;
+    height: 30px;
+    width: 100%;
+}
+
+.retweet,
+.retweet2 {
+    display: inline-block;
+    opacity: 1;
+    padding: 4px;
+    position: inherit;
+    right: 5em;
+    top: -0.2em;
+}
+
+a.cTwitterUserName {
+    color: rgb(170, 183, 193)!important;
+    display: block;
+    font-weight: normal !important;
+}
+
+.cTRUMPCOMMUNITYContainer .cCandidateImage,
+.cCRUZCOMMUNITYContainer .cCandidateImage {
+    display: inline-block;
+    width: 20%;
+    float: left;
+}
+
+.cTRUMPCOMMUNITYContainer .cCandidateImage,
+.cCRUZCOMMUNITYContainer .cCandidateImage {
+/*    display: inline-block;*/
+    width: 20%;
+    float: left;
+}
+
+.cCLINTONCOMMUNITYContainer .cCandidateImage,
+.cBERNIECOMMUNITYContainer .cCandidateImage {
+/*    display: inline-block;*/
+    width: 20%;
+    /*float: right;*/
+    margin-left: 7%;
+    margin-right: 6%;
+}
+
+
+/*    NEWS*/
+
+#nt-example1 li {
+    width: 100%;
+    display: inline-block;
+    min-height: 300px;
+}
+
+#nt-example1 img {
+    float: left;
+    border-radius: 50%;
+}
+
+#nt-example1 a {
+    font-family: 'Lora', serif;
+    /*    padding-left: 1.5em;*/
+    font-size: 1.3em;
+    display: inline-block;
+    float: left;
+    /*    width: 500px;
+    background: blue;*/
+}
+
+.cNewsBar {
+    border: 1px solid rgba(190, 6, 13, 1);
+    display: inline-block;
+    width: 100%;
+    background: #000000;
+    position: relative;
+    font-family: 'Lora', serif;
+    background-image: url("//b.content.wso2.com/sites/all/us-election/news-title.svg");
+    background-position: left;
+    background-repeat: no-repeat;
+    padding-left: 60px;
+}
+
+.cNewsBlock {
+    min-height: 300px;
+}
+
+.cNewsBar h3 {
+    background: rgba(190, 6, 13, 1) none repeat scroll 0 0;
+    color: #ffffff;
+    font-weight: normal;
+    margin: 0;
+    padding: 0.5em;
+    position: absolute;
+    left: -1px;
+    top: -60px;
+}
+
+.cNewsBar img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 1px solid #ffffff;
+}
+
+.cNewsImage {
+    width: 10%;
+    display: inline-block;
+    float: left;
+    margin-top: 12px;
+    margin-right: 10px;
+}
+
+.cNewsInfo {
+    width: 80%;
+    float: left;
+    display: inline-block;
+}
+
+.cNewsInfo .cNewsTitle a {
+    font-family: "Lora", serif !important;
+    font-size: 1.5em !important;
+    line-height: 1.2em !important;
+    margin-bottom: 0.3em;
+}
+
+.cNewsDate a {
+    font-size: 1em;
+    color: #ffffff !important;
+}
+
+.cHappy,
+.cSad {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+}
+
+.cHappy {
+    left: 70px;
+    top: 12%;
+}
+
+.cSad {
+    bottom: 27%;
+    left: 70px;
+}
+
+.cPopular-links-container .avatar {
+    display: none;
+}
+
+.cPopular-links-container h4.twitter-name a,
+.cPopular-links-container h4.twitter-name {
+    display: inline-block;
+    width: 100%;
+    font-family: "Lora", serif;
+    font-size: 1.2em!important;
+    color: #0d6fc4 !important;
+    font-weight: normal !important;
+}
+
+a:visited {
+    color: #0d6fc4;
+}
+
+.cFooter {
+    padding: 2em;
+    background: #000000;
+    color: #ffffff;
+}
+
+.cFooterImage {
+    text-align: left;
+}
+
+.cFooterText {
+    text-align: right;
+    
+}
+
+.cTermsConditionsText{
+    text-align: center;
+    color: #C3BABA;
+}
+
+.cShareButtons {
+    background: rgba(255, 255, 255, 0.7) none repeat scroll 0 0;
+    display: inline-block;
+    padding: 6px;
+    position: fixed;
+    right: 0;
+    top: 50%;
+    width: 40px;
+    z-index: 999999;
+    /*    display: none;*/
+}
+
+
+/*APRIL ELEMANTS*/
+
+a.gallery-trigger {
+    padding-bottom: 1em;
+    border: none;
+}
+
+a.gallery-trigger:hover {
+    padding-bottom: 1em;
+    border: none;
+}
+
+.gallery-contents {
+    background: blue;
+    z-index: 9999;
+}
+
+.gallery-item {
+    font-size: 15px;
+}
+
+.gallery-item .title {
+    padding: 0;
+    margin: 0;
+}
+
+.cFixedMenu {
+    position: fixed;
+    top: 0;
+    width: 25%;
+}
+
+.cSecondMenu {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 0;
+}
+
+.nav-tabs > li > a {
+    /*    border: 1px solid transparent;*/
+    border: none;
+    border-radius: 0;
+    line-height: 1.2em;
+    margin-right: 0;
+    padding: 2em 1em 1em;
+}
+
+.nav-tabs > li > a:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+    /*     border: 1px solid #ffffff;*/
+    border: none;
+}
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+    background-color: rgba(0, 0, 0, 1);
+    border: none;
+    color: #ffffff;
+    font-weight: 500;
+}
+
+.cSecondMenu ul {
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+
+.cSecondMenu ul li {
+    display: inline-block;
+    width: 25%;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    font-family: "Cinzel", serif;
+    color: #ffffff;
+}
+
+.cSecondMenu ul li a {
+    display: inline-block;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+.cSecondMenu ul li img {
+    width: 80px;
+}
+
+.cSecondMenu ul li .cSecondNavLink {
+    text-align: center;
+    font-size: 1.3em;
+    line-height: 1.2em;
+}
+
+.cSecondNavIcon {
+    padding-bottom: 1em;
+}
+
+.row.cSecondMenu.cFixedTop {
+    position: fixed;
+    top: 0;
+    padding: 0;
+    width: 100%;
+    z-index: 999;
+    background-color: #6B6A66;
+}
+
+.row.cSecondMenu.cFixedTop .cSecondNavIcon {
+    width: 20%;
+    padding-bottom: 0;
+}
+
+.row.cSecondMenu.cFixedTop .cSecondNavLink {
+    width: 80%;
+    text-align: left;
+    font-size: 1em;
+    line-height: 1em;
+}
+
+#Twitter-Stream-Analytics,
+#What-the-Community-Says,
+#Twitter-Interaction,
+#Media-Sentiment-Over-Time {
+    /*    top: 0px;
+    position: absolute;
+    */
+}
+
+.tab-content > .active {
+    display: block;
+    height: 0px;
+    overflow: hidden;
+}
+
+.tab-pane.fade.hidepannel.active.in {
+    height: auto !important;
+    overflow: auto;
+}
+
+.graph-selector {
+    height: 100px;
+    background-color: grey;
+}
+
+.graph-selector .text-center {
+    color: white;
+    font-size: 1em;
+    text-transform: uppercase;
+    height: inherit;
+}
+
+.graph-nav {
+    display: flex;
+    /*    position: absolute*/
+}
+
+#people-graph-selector {
+    border-right: 1px solid white;
+}
+
+#people-graph-selector:hover {
+    background-color: grey;
+}
+
+#media-graph-selector {
+    border-left: 1px solid white;
+}
+
+#media-graph-selector:hover {
+    background-color: grey;
+}
+
+#graph-selector .active {
+    background-color: black;
+}
+
+hr {
+    border: 0;
+    height: 3px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(212, 212, 212, 0.75), rgba(0, 0, 0, 0));
+}
+
+
+/*BLOG*/
+
+.cBlogs .cElectionIntro h1 {
+    color: #404041;
+    font-size: 2.3em;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 1.1em;
+    margin-bottom: 0.4em;
+    margin-top: 0.4em;
+}
+
+.cBlogs .cElectionIntro h1 a {
+    color: #000000;
+    cursor: pointer;
+}
+
+.cBlogs .cElectionIntro h2 {
+    font-size: 6.5em;
+    line-height: 0.9em;
+    margin-bottom: 0;
+    margin-top: 0.2em;
+}
+
+.cBlogContent h3 {
+    font-size: 2.5em;
+    line-height: 1.3em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.cBlogContent h4 {
+    font-family: 'Cinzel', serif;
+    font-size: 2.2em;
+    font-weight: bold;
+}
+
+.cBlogContent {
+    max-width: 700px;
+    display: inline-block;
+    float: left;
+}
+
+.cBlogContent p {
+    font-size: 1.3em;
+    line-height: 1.6em;
+}
+
+.cDate {
+    background: #000000;
+    color: #ffffff;
+    display: inline-block;
+    padding: 0.5em;
+    font-style: italic;
+}
+
+.cAuthor {
+    margin-bottom: 2em;
+}
+
+@media screen and (max-width: 1190px) {
+    .cElectionIntro h1 {
+        font-size: 4.5em;
+    }
+    .cTitle {
+        font-size: 1em;
+    }
+    .cBlogs .cElectionIntro h1 a {
+        color: #ffffff;
+    }
+    .cBlogs .cElectionIntro h2 {
+        font-size: 4.2em;
+    }
+    body.cElection,
+    body {
+        background-position: top;
+        /*        background-repeat: repeat;*/
+        background-size: 100%;
+        background-color: #000000;
+    }
+    .cBlogContent img {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 990px) {
+    .cElectionIntroRight {
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 1em;
+    }
+    .cElectionIntro h1 {
+        background: black none repeat scroll 0 0;
+        display: inline-block;
+        font-size: 2.5em;
+        line-height: 0.9em;
+        padding: 1.2em 0.3em;
+        color: #ffffff;
+        margin-bottom: 1em;
+    }
+    .cElectionIntroBottom {
+        padding-top: 2em;
+    }
+    .cElectionIntroRight {
+        margin-bottom: 2em;
+    }
+    .cPartyContainer h3 {
+        font-size: 1.2em;
+    }
+    .cWorCloud h3 span {
+        font-size: 1.4em;
+        font-weight: normal;
+        width: 100%;
+        display: block;
+    }
+    .cFooter {
+        padding: 1em;
+    }
+    .cFooterImage,
+    .cFooterText {
+        text-align: center;
+    }
+    .row.cSecondMenu {
+        display: none;
+    }
+    .tab-content > .tab-pane {
+        display: block;
+    }
+    .fade {
+        opacity: 1;
+    }
+    .tab-content > .active {
+        display: block;
+        height: auto;
+        overflow: hidden;
+    }
+    .tab-pane.fade.hidepannel.active.in {
+        height: auto !important;
+        overflow: auto;
+    }
+}
+
+@media screen and (max-width: 590px) {
+    .cNumbers {
+        font-size: 2.4em;
+    }
+    body.cElection,
+    body {
+        /*    background-position: center 9%;*/
+    }
+    .cShareButtons {
+        top: 7%;
+        padding: 6px;
+        top: 7%;
+        width: 32px;
+    }
+    .row.cWhiteSection.cCommunity {
+        background-size: 950%;
+        background-color: #ffffff;
+    }
+}

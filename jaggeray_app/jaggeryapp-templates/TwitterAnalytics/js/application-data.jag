@@ -1,0 +1,4 @@
+<% 
+    var data = require('../application-data.json'); 
+	print(stringify(data));  
+%>

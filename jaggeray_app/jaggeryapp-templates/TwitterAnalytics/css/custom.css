@@ -1,0 +1,96 @@
+/*
+* CSS for community graph
+*/
+
+.community-graph-legend{
+    text-align:right;
+    list-style:none;
+    padding:0px;
+    margin:10px 0px;
+}
+.community-graph-legend li{
+    display:inline;
+    margin-left:2em;
+}
+
+
+
+.color1{ background:#ffc107; }
+.color2{ background:#ce93d8; }
+.color3{ background:#4db6ac; }
+.color4{ background:#cddc39; }
+.color5{ background:#f48fb1; }
+
+.text-color1{color:#fa574b; }
+.text-color2{color:#1c40fb; }
+.text-color3{color:#3ec2ee; }
+.text-color4{color:#e51000; }
+.text-color5{color:#f48fb1; }
+
+
+.cGraph{
+    max-width: 100%;
+    height:600px;
+    outline: 1px solid black;
+    background: #ffffff;
+}
+
+.WCcontainer{
+     max-width: 100%;
+        height:450px;
+        outline: 1px solid black;
+        background: #ffffff;
+        padding: 5px;
+
+}
+
+.dimOverlay{
+	background: black !important;
+	position: absolute;
+	opacity: 0.8;
+	width: 100%;
+	margin-left: -6%;
+	margin-top: -6%;
+}
+
+
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 300;
+}
+
+b {
+    font-weight: 900;
+}
+
+.outline {
+    fill: none;
+    stroke: #888888;
+    stroke-width: 1px;
+}
+
+#tooltip {
+    font-size: 12pt;
+    font-weight: 900;
+    fill: white;
+    stroke: grey;
+    stroke-width: 0.25px;
+}
+
+.node {
+    stroke: black;
+    stroke-weight: 1px;
+}
+
+.link {
+    fill: none;
+    stroke: #888888;
+    stroke-weight: 3px;
+    stroke-opacity: 0.5;
+}
+
+.highlight {
+    stroke: red;
+    stroke-weight: 4px;
+    stroke-opacity: 1.0;
+}
