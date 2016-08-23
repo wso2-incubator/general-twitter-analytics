@@ -15,8 +15,8 @@
             <definition type="RDBMS"> 
                 <configuration> 
                     <url>jdbc:mysql://localhost:3306/REGISTRY_DB?autoReconnect=true</url> 
-                    <username>root</username> 
-                    <password>123</password> 
+                    <username>[db_username]</username>
+                    <password>[db_password]</password> 
                     <driverClassName>com.mysql.jdbc.Driver</driverClassName> 
                     <maxActive>50</maxActive> 
                     <maxWait>60000</maxWait> 
@@ -35,8 +35,8 @@
             <definition type="RDBMS"> 
                 <configuration> 
                     <url>jdbc:mysql://localhost:3306/WSO2_USER_DB</url> 
-                    <username>root</username> 
-                    <password>123</password> 
+                    <username>[db_username]</username>
+                    <password>[db_password]</password> 
                     <driverClassName>com.mysql.jdbc.Driver</driverClassName> 
                     <maxActive>50</maxActive> 
                     <maxWait>60000</maxWait> 
