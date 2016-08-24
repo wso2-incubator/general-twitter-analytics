@@ -14,6 +14,8 @@ siddhi-extension-twitteranalytic-3.0.6-SNAPSHOT.jar
 4.worldcloud extension
 siddhi-extension-worldcloud-3.0.6-SNAPSHOT.jar
 
-------------------------------------------------------------------------------------------
-Copy each of the above .jar files into the DAS dropins folder
+-------------------------------------------------------------
+Copy each of the above .jar files into _DAS_HOME/repository/components/dropins/_ folder
+-------------------------------------------------------------
+
 
