@@ -2,13 +2,13 @@
 
 **1. Configure DB**  
     1.1 Download this repository and navigate to _database/_ folder and find _twitterAnalytics_db.sql_ file  
-	1.2. If you already installed mysql server in your local machine please ignore this step 
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Install mysql to your local machine by entering the following command in the terminal:
+	1.2. If you already installed mysql server in your local machine please ignore this step   
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Install mysql to your local machine by entering the following command in the terminal:  
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`sudo apt-get install mysql-server mysql-client`  
  	1.3 Log into mysql server using `mysql -u [username] -p[password]` and execute following commands  
    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Change mysql connection limit with: `set global max_connections = 10000;`  
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`CREATE DATABASE twitter_analytics_db;`
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`CREATE DATABASE twitter_analytic_DAS_db;`
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`CREATE DATABASE twitter_analytics_db;`  
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`CREATE DATABASE twitter_analytic_DAS_db;`  
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`CREATE DATABASE twitter_analytic_ProcessDAS_db;`  
  	1.4 Logout from mysql using `quit;`   
  	1.5 Import Databases using following commands   
