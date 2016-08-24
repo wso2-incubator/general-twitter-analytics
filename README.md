@@ -31,9 +31,9 @@
      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.6 Copy _jaggeray_app/jaggeryapp-templates/_ folder into _DAS_HOME/repository/conf/template-manager/_  
      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.7 Start DAS server using following command: `sh DAS_HOME/bin/wso2server.sh`  
      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.8 Use the following url to access DAS Management Console : https://[host_ip]:9450/carbon/  
-     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.9 Using left navigation pane, Create Datasource in configure > Datasources > add Datasources with following configurations
-     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`name = GENERAL_TWITTERANALYTICS_DB`
-     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`Database Engine = MySQL`
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.9 Using left navigation pane, Create Datasource in configure > Datasources > add Datasources with following configurations  
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`name = GENERAL_TWITTERANALYTICS_DB`  
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`Database Engine = MySQL`  
      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`URL = jdbc:mysql://[machine-name/ip]:[port]/twitter_analytics_db`  
      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.10 Using left navigation pane, Main > Manage > Carbon Applications > Add and browse _cApps/TwitterAnalyticsDAScApp_1.0.0.car_ > Upload > Refresh the page  
      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.11 Using left navigation pane, Main > Dashboard > Template Manager > TwitterAnalytic > Create New Scenario then provide required details.  
