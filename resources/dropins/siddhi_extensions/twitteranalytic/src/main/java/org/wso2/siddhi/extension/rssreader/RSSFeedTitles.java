@@ -49,24 +49,18 @@ import java.util.List;
 
 public class RSSFeedTitles extends StreamProcessor {
     private static final Logger LOGGER = LoggerFactory.getLogger(RSSFeedTitles.class);
-    private String G1_P1;
-    private String G1_P2;
-    private String G2_P1;
-    private String G2_P2;
-    private String MAIN_TITLE;
     private String keyword;
     private String urlString;
     private int passToOut;
 
     @Override
     public void start() {
-
+        // Nothing to do here
     }
 
     @Override
     public void stop() {
         // Nothing to do here
-
     }
 
     @Override
@@ -77,7 +71,6 @@ public class RSSFeedTitles extends StreamProcessor {
     @Override
     public void restoreState(Object[] state) {
         // No need to maintain a state.
-
     }
 
     @Override
@@ -122,74 +115,13 @@ public class RSSFeedTitles extends StreamProcessor {
     protected List<Attribute> init(AbstractDefinition inputDefinition,
             ExpressionExecutor[] attributeExpressionExecutors, ExecutionPlanContext executionPlanContext) {
         if (attributeExpressionExecutors.length != 2) {
-            throw new IllegalArgumentException("Invalid no of arguments passed to math:sin() function, "
+            throw new IllegalArgumentException("Invalid no of arguments passed to TwitterAnalytic:readRSSTitlesStream() function, "
                     + "required 1, but found " + attributeExpressionExecutors.length);
-        }
-
-        InputStream file = getClass().getResourceAsStream("/htag.xml");
-
-        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder dBuilder = null;
-
-        try {
-            dBuilder = dbFactory.newDocumentBuilder();
-
-            Document doc = dBuilder.parse(file);
-            doc.getDocumentElement().normalize();
-            NodeList groupNodes = doc.getElementsByTagName("group");
-            int count = 0;
-            for (int i = 0; i < 2; i++) {
-                Element subGroupNodes = (Element) groupNodes.item(i);
-                NodeList subGroupList = subGroupNodes.getElementsByTagName("sub-group");
-
-                for (int j = 0; j < subGroupList.getLength(); j++) {
-
-                    switch (count){
-                        case 0:
-                            G1_P1 = subGroupList.item(j).getAttributes().getNamedItem("name").toString().substring(6).replace("\"", "");
-                            break;
-                        case 1:
-                            G1_P2 = subGroupList.item(j).getAttributes().getNamedItem("name").toString().substring(6).replace("\"", "");
-                            break;
-                        case 2:
-                            G2_P1 = subGroupList.item(j).getAttributes().getNamedItem("name").toString().substring(6).replace("\"", "");
-                            break;
-                        case 3:
-                            G2_P2 = subGroupList.item(j).getAttributes().getNamedItem("name").toString().substring(6).replace("\"", "");
-                            break;
-                    }
-                    count++;
-                }
-            }
-
-            NodeList mainTitleNode = doc.getElementsByTagName("main-title");
-            MAIN_TITLE = mainTitleNode.item(0).getTextContent().toLowerCase().replace(" ","+");
-
-
-
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
         }
 
         if (attributeExpressionExecutors[0] instanceof ConstantExpressionExecutor) {
             keyword = ((String) attributeExpressionExecutors[0].execute(null));
-            if (keyword.equals("G1_P1")){
-                urlString = "https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&q="+G1_P1+"&output=rss";
-            } else if (keyword.equals("G1_P2")){
-                urlString = "https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&q="+G1_P2+"&output=rss";
-            } else if (keyword.equals("G2_P1")){
-                urlString = "https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&q="+G2_P1+"&output=rss";
-            } else if (keyword.equals("G2_P2")){
-                urlString = "https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&q="+G2_P2+"&output=rss";
-            } else if (keyword.equals("Topic")){
-                urlString = "https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&q="+MAIN_TITLE+"&output=rss";
-            } else {
-                throw new IllegalArgumentException("The first parameter should be either \"G1_P1\", \"G1_P2\", \"G2_P1\", \"G2_P2\" or \"Topic\" ");
-            }
+            urlString = "https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&q="+keyword+"&output=rss";
 
         } else {
             throw new IllegalArgumentException("The first parameter should be an String");
