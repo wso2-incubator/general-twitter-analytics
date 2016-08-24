@@ -536,7 +536,7 @@ update googleLatestNews on googleLatestNews.ID ==ID;
 					  "pmtdb": {
 					    "username": "$username",
 					    "password": "$password",
-					    "databasename" : "cep_data_db",
+					    "databasename" : "twitter_analytics_db",
 					    "databaseurl" : "jdbc:mysql://$host:$port/"
 					    }     
 				}
