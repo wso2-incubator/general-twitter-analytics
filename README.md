@@ -16,7 +16,7 @@
 
 **2. Download required wso2 products**   
 	 2.1 Download WSO2 Enterprise Service Bus 4.9.0 from http://wso2.com/products/enterprise-service-bus/ and extract.  
-	 2.2 Download WSO2 Data Analytic Server 3.1.0 from http://wso2.com/products/data-analytics-server/ and extract.
+	 2.2 Download WSO2 Data Analytic Server 3.1.0 from http://wso2.com/products/data-analytics-server/ and extract.  
 	 2.3 Open _DAS_HOME/repository/conf/carbon.xml_ and change the offset of the server to 7 by replacing line relevant line with `<offset>7<offset>`  
 	 2.3 Download the WSO2 twitter connector from https://storepreview.wso2.com/store/assets/esbconnector/313cbd79-c183-43d2-8a6f-fb2721973ed9 and copy the jar to the _ESB_HOME/repository/components/dropins/_ directory in ESB.    
  
@@ -24,20 +24,22 @@
 	 Find all .car files in _cApps/_ folder and other resources in _resources/_ folder  
 	 3.1 DAS cApp  
      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.1 Navigate into _resources/dropins/_ folder and follow the instructions provided in _DAS_dropins.md_  
-     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.2 navigate into _resources/lib/_ folder and download the files listed in _DAS_lib.md_ file. Copy the downloads into _DAS_HOME/repository/components/lib/_  
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.2 Navigate into _resources/lib/_ folder and download the files listed in _DAS_lib.md_ file. Copy the downloads into _DAS_HOME/repository/components/lib/_  
      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.3 Unzip _resources/patches/patches.zip_ and place the zip contents in _DAS_HOME/repository/components/patches/_  
      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.4 Copy and replace the _resources/datasources/analytics-datasources.xml_ and _master-datasources.xml_ files into _DAS_HOME/repository/conf/datasources/_ and follow the next step  
      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.5 Edit lines 17,18,40,41 of _analytics-datasources.xml_ and lines 18,19,38,39 of _master-datasources.xml_  
-     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.6 Copy _jaggeray_app/jaggeryapp-templates/_ folder into _DAS_HOME/repository/conf/template-manager/_  
-     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.7 Start DAS server using following command: `sh DAS_HOME/bin/wso2server.sh`  
-     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.8 Use the following url to access DAS Management Console : https://[host_ip]:9450/carbon/  
-     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.9 Using left navigation pane, Create Datasource in configure > Datasources > add Datasources with following configurations  
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.6 Open _DAS_HOME/repository/conf/analytics/rdbms-config.xml_ and edit line 46 as follows. Replace `MyISAM` with `InnoDB`  
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.7 Copy _jaggeray_app/jaggeryapp-templates/_ folder into _DAS_HOME/repository/conf/template-manager/_ folder  
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.8 Copy _domain_template/twitter-analytic.xml_ file into _DAS_HOME/repository/conf/template-manager/domain-template/_ folder  
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.9 Navigate into _DAS_HOME_ and start DAS server using following command: `sh DAS_HOME/bin/wso2server.sh`    
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.10 Use the following url to access DAS Management Console : https://[host_ip]:9450/carbon/  
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.11 Using left navigation pane, Create Datasource in configure > Datasources > add Datasources with following configurations  
      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`name = GENERAL_TWITTERANALYTICS_DB`  
      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`Database Engine = MySQL`  
      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`URL = jdbc:mysql://[machine-name/ip]:[port]/twitter_analytics_db`  
-     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.10 Using left navigation pane, Main > Manage > Carbon Applications > Add and browse _cApps/TwitterAnalyticsDAScApp_1.0.0.car_ > Upload > Refresh the page  
-     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.11 Using left navigation pane, Main > Dashboard > Template Manager > TwitterAnalytic > Create New Scenario then provide required details.  
-     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.12 Cut and paste _DAS_HOME/repository/deployment/server/jaggeryapps/[Jaggery Application Name]/htag.xml_ and paste inside _esb_service/src/main/resources_ in the downloaded repository  
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.12 Using left navigation pane, Main > Manage > Carbon Applications > Add and browse _cApps/TwitterAnalyticsDAScApp_1.0.0.car_ > Upload > Refresh the page  
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.13 Using left navigation pane, Main > Dashboard > Template Manager > TwitterAnalytic > Create New Scenario then provide required details.  
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.14 Cut and paste _DAS_HOME/repository/deployment/server/jaggeryapps/[Jaggery Application Name]/htag.xml_ and paste inside _esb_service/src/main/resources_ in the downloaded repository  
 
    3.2 ESB cApp
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.1 Start ESB server using following command: `sh ESB_HOME/bin/wso2server.sh`  
