@@ -521,8 +521,8 @@ update googleLatestNews on googleLatestNews.ID ==ID;
 					  <hash-tag>$htagListDefault</hash-tag>
 				    </group>
 				    <management-console>
-					<username>"$esbUn"</username>
-					<password>"$esbPwd"</password>
+					<username>$esbUn</username>
+					<password>$esbPwd</password>
 				    </management-console>
 
 				</twitter-analytic-app>   
