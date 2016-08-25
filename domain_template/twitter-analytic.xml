@@ -278,6 +278,190 @@ insert into TweeterDataGroupAttached;
                  ]]>
                 </template>
 
+<template type="realtime">
+                    <![CDATA[
+@Plan:name('ArticleSentimentRateExecution')
+
+define trigger StartUpTrigger at every 6 hours;
+define trigger UpTrigger at every 24 hours;
+
+@From(eventtable='rdbms', datasource.name='GENERAL_TWITTERANALYTICS_DB', table.name='SentimentRate')
+define table TextDate(CDate string,ID string,G1_P1 double,G1_P2 double,G2_P1 double,G2_P2 double);
+
+define stream TextReadG1_P1(text string);
+define stream TextClearG1_P1(text string,CDate string);
+@From(eventtable='rdbms', datasource.name='GENERAL_TWITTERANALYTICS_DB', table.name='SentimentRate')
+define table TextRateG1_P1(CDate string,G1_P1 double);
+
+define stream TextReadG1_P2(text string);
+define stream TextClearG1_P2(text string,CDate string);
+@From(eventtable='rdbms', datasource.name='GENERAL_TWITTERANALYTICS_DB', table.name='SentimentRate')
+define table TextRateG1_P2(CDate string,G1_P2 double);
+
+define stream TextReadG2_P1(text string);
+define stream TextClearG2_P1(text string,CDate string);
+@From(eventtable='rdbms', datasource.name='GENERAL_TWITTERANALYTICS_DB', table.name='SentimentRate')
+define table TextRateG2_P1(CDate string,G2_P1 double);
+
+define stream TextReadG2_P2(text string);
+define stream TextClearG2_P2(text string,CDate string);
+@From(eventtable='rdbms', datasource.name='GENERAL_TWITTERANALYTICS_DB', table.name='SentimentRate')
+define table TextRateG2_P2(CDate string,G2_P2 double);
+
+define stream val(ID string);
+ 
+from UpTrigger
+select UUID() as ID
+insert into val;
+
+from val#window.length(30)
+select time:dateFormat(time:currentDate(), 'yyyy/MM/dd', 'yyyy-MM-dd') as CDate,ID,math:parseDouble("0") as G1_P1,math:parseDouble("0") as G1_P2,math:parseDouble("0") as G2_P1,math:parseDouble("0") as G2_P2 
+insert current events into TextDate;
+
+from val#window.length(30)
+select time:dateFormat(time:currentDate(), 'yyyy/MM/dd', 'yyyy-MM-dd')  as CDate,ID 
+delete TextDate for expired events on TextDate.ID==ID ;
+
+from StartUpTrigger
+select TwitterAnalytic:readRSSText("$GroupOneSubGroupOne")as text
+insert into TextReadG1_P1;
+
+from TextReadG1_P1
+select TwitterAnalytic:trackSentimentWord(text,"$GroupOneSubGroupOne")as text, time:dateFormat(time:currentDate(), 'yyyy/MM/dd', 'yyyy-MM-dd')   as CDate
+insert into TextClearG1_P1;
+
+from TextClearG1_P1#window.lengthBatch(4)
+select time:dateFormat(time:currentDate(), 'yyyy/MM/dd', 'yyyy-MM-dd')   as CDate , avg(TwitterAnalytic:getSentimentRate(text,'COMMON')) as G1_P1
+group by CDate
+update TextRateG1_P1 on TextRateG1_P1.CDate==CDate;
+
+
+
+from StartUpTrigger
+select TwitterAnalytic:readRSSText("$GroupOneSubGroupTwo")as text
+insert into TextReadG1_P2;
+
+from TextReadG1_P2
+select TwitterAnalytic:trackSentimentWord(text,"$GroupOneSubGroupTwo")as text, time:dateFormat(time:currentDate(), 'yyyy/MM/dd', 'yyyy-MM-dd')   as CDate
+insert into TextClearG1_P2;
+
+from TextClearG1_P2#window.lengthBatch(4)
+select time:dateFormat(time:currentDate(), 'yyyy/MM/dd', 'yyyy-MM-dd')   as CDate, avg(TwitterAnalytic:getSentimentRate(text,'COMMON')) as G1_P2
+group by CDate
+update TextRateG1_P2 on TextRateG1_P2.CDate==CDate;
+
+
+
+from StartUpTrigger
+select TwitterAnalytic:readRSSText("$GroupTwoSubGroupOne")as text
+insert into TextReadG2_P1;
+
+from TextReadG2_P1
+select TwitterAnalytic:trackSentimentWord(text,"$GroupTwoSubGroupOne")as text, time:dateFormat(time:currentDate(), 'yyyy/MM/dd', 'yyyy-MM-dd')   as CDate
+insert into TextClearG2_P1;
+
+from TextClearG2_P1#window.lengthBatch(4)
+select time:dateFormat(time:currentDate(), 'yyyy/MM/dd', 'yyyy-MM-dd')   as CDate, avg(TwitterAnalytic:getSentimentRate(text,'COMMON')) as G2_P1
+group by CDate
+update TextRateG2_P1 on TextRateG2_P1.CDate==CDate;
+
+
+
+from StartUpTrigger
+select TwitterAnalytic:readRSSText("$GroupTwoSubGroupTwo")as text
+insert into TextReadG2_P2;
+
+from TextReadG2_P2
+select TwitterAnalytic:trackSentimentWord(text,"$GroupTwoSubGroupTwo")as text, time:dateFormat(time:currentDate(), 'yyyy/MM/dd', 'yyyy-MM-dd')   as CDate
+insert into TextClearG2_P2;
+
+from TextClearG2_P2#window.lengthBatch(4)
+select time:dateFormat(time:currentDate(), 'yyyy/MM/dd', 'yyyy-MM-dd')   as CDate, avg(TwitterAnalytic:getSentimentRate(text,'COMMON')) as G2_P2
+group by CDate
+update TextRateG2_P2 on TextRateG2_P2.CDate==CDate;
+                 ]]>
+                </template>
+
+		<template type="realtime">
+                    <![CDATA[
+
+@Plan:name('TooltipNewsExecution')
+
+define Trigger CallUpTrigger  at every 24 hours;
+
+@From(eventtable='rdbms', datasource.name='GENERAL_TWITTERANALYTICS_DB', table.name='news')
+define table  G1_P1News( CDate string,G1_P1 string,ID int);
+
+@From(eventtable='rdbms', datasource.name='GENERAL_TWITTERANALYTICS_DB', table.name='news')
+define table  G1_P2News( CDate string,G1_P2 string,ID int);
+
+@From(eventtable='rdbms', datasource.name='GENERAL_TWITTERANALYTICS_DB', table.name='news')
+define table  G2_P1News( CDate string,G2_P1 string,ID int);
+
+@From(eventtable='rdbms', datasource.name='GENERAL_TWITTERANALYTICS_DB', table.name='news')
+define table  G2_P2News( CDate string,G2_P2 string,ID int);
+
+
+@From(eventtable='rdbms', datasource.name='GENERAL_TWITTERANALYTICS_DB', table.name='news')
+define table  insertDate( CDate string, ID int);
+
+
+from CallUpTrigger
+select time:dateFormat(time:currentDate(), 'yyyy/MM/dd', 'yyyy-MM-dd')   as CDate, 1 as ID
+insert into insertDate;
+
+from CallUpTrigger
+select time:dateFormat(time:currentDate(), 'yyyy/MM/dd', 'yyyy-MM-dd')   as CDate, 2 as ID
+insert into insertDate;
+
+from CallUpTrigger
+select time:dateFormat(time:currentDate(), 'yyyy/MM/dd', 'yyyy-MM-dd')   as CDate, 3 as ID
+insert into insertDate;
+
+
+from CallUpTrigger#TwitterAnalytic:readRSSTitlesStream("$GroupOneSubGroupOne",3)[G1_P1News.ID==Count in G1_P1News]
+select time:dateFormat(time:currentDate(), 'yyyy/MM/dd', 'yyyy-MM-dd')    as CDate,Title as G1_P1, Count as ID
+update G1_P1News on G1_P1News.CDate==CDate AND G1_P1News.ID==ID;
+
+from CallUpTrigger#TwitterAnalytic:readRSSTitlesStream("$GroupOneSubGroupTwo",3)[G1_P2News.ID==Count in G1_P2News]
+select time:dateFormat(time:currentDate(), 'yyyy/MM/dd', 'yyyy-MM-dd')    as CDate,Title as G1_P2, Count as ID
+update G1_P2News on G1_P2News.CDate==CDate AND G1_P2News.ID==ID;
+
+from CallUpTrigger#TwitterAnalytic:readRSSTitlesStream("$GroupTwoSubGroupOne",3)[G2_P1News.ID==Count in G2_P1News]
+select time:dateFormat(time:currentDate(), 'yyyy/MM/dd', 'yyyy-MM-dd')    as CDate,Title as G2_P1, Count as ID
+update G2_P1News on G2_P1News.CDate==CDate AND G2_P1News.ID==ID;
+
+from CallUpTrigger#TwitterAnalytic:readRSSTitlesStream("$GroupTwoSubGroupTwo",3)[G2_P2News.ID==Count in G2_P2News]
+select time:dateFormat(time:currentDate(), 'yyyy/MM/dd', 'yyyy-MM-dd')    as CDate,Title as G2_P2, Count as ID
+update G2_P2News on G2_P2News.CDate==CDate AND G2_P2News.ID==ID;
+
+                 ]]>
+                </template>
+
+
+		<template type="realtime">
+                    <![CDATA[
+
+@Plan:name('GoogleNewsExecution')
+
+@From(eventtable='rdbms', datasource.name='GENERAL_TWITTERANALYTICS_DB', table.name='googleLatestNews')
+define table  googleLatestNews( text string, Pub_Date string,Link string,Discription string,Owner string,ID int,DateTime string);
+							   
+define trigger StartUp at 'start';
+define trigger CallUpTrigger at every  15 min;
+
+from StartUp
+delete googleLatestNews on 1 ;
+
+/*from  CallUpTrigger#TwitterAnalytic:readRSSTitlesStream("$mainTitle",5)[not(googleLatestNews.ID==Count in googleLatestNews)]
+select Title as text , Pub as Pub_Date, Link as Link , Dis as Discription ,"" as Owner ,Count as ID,time:currentTimestamp() as DateTime							   				   
+insert into googleLatestNews;*/
+
+from  CallUpTrigger#TwitterAnalytic:readRSSTitlesStream("$mainTitle",5)[googleLatestNews.ID==Count in googleLatestNews]
+select Title as text , Pub as Pub_Date, Link as Link , Dis as Discription ,"" as Owner ,Count as ID,time:currentTimestamp() as DateTime	
+update googleLatestNews on googleLatestNews.ID ==ID;
+                 ]]>
+                </template>
                 <template type="jaggeryapp">
                     <config>
                         <properties>
@@ -352,7 +536,7 @@ insert into TweeterDataGroupAttached;
 					  "pmtdb": {
 					    "username": "$username",
 					    "password": "$password",
-					    "databasename" : "cep_data_db",
+					    "databasename" : "twitter_analytics_db",
 					    "databaseurl" : "jdbc:mysql://$host:$port/"
 					    }     
 				}
