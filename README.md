@@ -46,8 +46,8 @@
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.2 Use this url to access ESB Management Console : https://[host_ip]:9443/carbon/  
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.3 Using left navigation pane go to Main > Manage > Carbon Applications > Add and browse _TwitterAnalyticsESBcApp_1.0.0.car_ > Upload > Refresh the page  
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.4 Open _InsertInboundEndpoint.java_ file found in _esb_service/src/main/java/org/wso2/esb/inboundadmin/_ folder. Insert the host ip address of the ESB instance into line 38 (Sample shown in line 37)  
-	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.4 Navigate back to _esb_service/_ folder and build the project using _mvn clean install_ This will create _ESBService-1.0-SNAPSHOT.jar_ in the _target_ folder  
-	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.5 Copy the _ESBService-1.0-SNAPSHOT.jar_ into the _ESB_HOME_ directory and run the file using the terminal command `java -jar ESBService-1.0-SNAPSHOT.jar` 
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.4 Navigate back to _esb_service/_ folder and build the project using `mvn clean compile assembly:single` This will create _ESBService-1.0-SNAPSHOT-jar-with-dependencies.jar_ in the _target_ folder  
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.5 Copy the _ESBService-1.0-SNAPSHOT-jar-with-dependencies.jar_ into the _ESB_HOME_ directory and run the file using the terminal command `java -jar ESBService-1.0-SNAPSHOT.jar` 
 	    
 **4. Customize Extensions(if needed any additional functionalities)**  
 	 4.1 Download siddhi_extensions folder  
