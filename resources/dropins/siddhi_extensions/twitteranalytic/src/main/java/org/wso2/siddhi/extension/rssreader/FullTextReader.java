@@ -35,7 +35,9 @@ import org.wso2.siddhi.query.api.exception.ExecutionPlanValidationException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.net.URLEncoder;
 
 public class FullTextReader extends FunctionExecutor {
     private static final Logger LOGGER = LoggerFactory.getLogger(FullTextReader.class);
@@ -87,7 +89,11 @@ public class FullTextReader extends FunctionExecutor {
     protected Object execute(Object data) {
         StringBuilder formatedString = new StringBuilder();
 
-        urlString = "https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&q=" + data + "&output=rss";
+        try {
+            urlString = "https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&q=" + URLEncoder.encode((String)data, "UTF-8") + "&output=rss";
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
         if ((urlString).startsWith("https:")) {
             try {

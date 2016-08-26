@@ -42,7 +42,9 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,11 +85,11 @@ public class RSSFeedTitles extends StreamProcessor {
             if (urlString.startsWith("https:")) {
                 try {
                     rssURL = new URL(urlString);
-                    TextArticles articals = readFeed(rssURL);
-                    String[] titles = articals.getTitles();
-                    String[] publishedDates = articals.getPublishedDate();
-                    String[] descriptions = articals.getDescription();
-                    String[] links = articals.getLinks();
+                    TextArticles articles = readFeed(rssURL);
+                    String[] titles = articles.getTitles();
+                    String[] publishedDates = articles.getPublishedDate();
+                    String[] descriptions = articles.getDescription();
+                    String[] links = articles.getLinks();
                     int min = (passToOut > titles.length) ? titles.length : passToOut;
                     for (int i = 0; i < min; i++) {
                         StreamEvent clonedEvent = streamEventCloner.copyStreamEvent(streamEvent);
@@ -121,7 +123,11 @@ public class RSSFeedTitles extends StreamProcessor {
 
         if (attributeExpressionExecutors[0] instanceof ConstantExpressionExecutor) {
             keyword = ((String) attributeExpressionExecutors[0].execute(null));
-            urlString = "https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&q="+keyword+"&output=rss";
+            try {
+                urlString = "https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&q="+ URLEncoder.encode(keyword, "UTF-8")+"&output=rss";
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
 
         } else {
             throw new IllegalArgumentException("The first parameter should be an String");
