@@ -1,0 +1,46 @@
+<% 
+
+    var Para = request.getContent();
+    var data = require('../config.json'); 
+    var db = new Database(data.pmtdb.databaseurl+data.pmtdb.databasename, data.pmtdb.username, data.pmtdb.password);
+    var result = db.query("SELECT * FROM topBK");
+    
+    var data = [];
+    var log=new Log();
+    
+    //for (var i in result) {
+for (i = 3; i < result.length; i=i+4) {  
+	var myJson1 = {};
+	myJson1.Date = result[i].CDate;
+	myJson1.Candidate = "TRUMP";
+	myJson1.Rate = result[i]["TRUMP"];
+        data.push(myJson1);
+
+	var myJson3 = {};
+	myJson3.Date = result[i].CDate;	
+	myJson3.Candidate = "CRUZ";
+	myJson3.Rate = result[i]["CRUZ"];
+        data.push(myJson3);
+        
+
+
+	var myJson4 = {};
+	myJson4.Date = result[i].CDate;	
+	myJson4.Candidate = "CLINTON";
+	myJson4.Rate = result[i]["CLINTON"];
+        data.push(myJson4);
+        
+
+
+	var myJson5 = {};
+	myJson5.Date = result[i].CDate;	
+	myJson5.Candidate = "BERNIE";
+	myJson5.Rate = result[i]["BERNIE"];
+        data.push(myJson5);
+
+        
+    }
+    db.close();
+	//log.info(data); 
+	print(stringify(data));  
+%>

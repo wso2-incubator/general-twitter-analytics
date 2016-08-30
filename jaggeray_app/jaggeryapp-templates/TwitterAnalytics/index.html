@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Twitter Analytic App</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="WSO2 Election Monitor" />
+    <meta property="og:description" content="Every day, thousands of tweets and dozens of news articles about the US Election hit the Internet." />
+    <meta property="og:image" content="//b.content.wso2.com/sites/all/us-election/fb-share.jpg" />
+    <link rel="shortcut icon" href="//wso2.com/files/favicon.ico" type="image/x-icon" />
+
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="css/icons.css" />
+    <script src="https://code.jquery.com/jquery-2.1.0.min.js">
+        jQuery.noConflict();
+    </script>
+    <script src="js/jquery.newsTicker.min.js" type="text/javascript">
+        jQuery.noConflict();
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js">
+        jQuery.noConflict();
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="js/gephi.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="js/circleD3Graph.js"></script>
+
+
+
+    <!--<link rel="stylesheet" type="text/css" href="fonts/font-wso2_1.2/css/font-wso2.css"/>-->
+    <link rel="stylesheet" type="text/css" href="css/component.css" />
+    <!-- Custom css-->
+    <link rel="stylesheet" type="text/css" href="css/custom.css" />
+    <!-- Font WSO2 CSS -->
+    <link href="libs/font-wso2_1.2/css/font-wso2.css" rel="stylesheet" type="text/css" />
+    <!--Twitter.css-->
+    <link rel="stylesheet" type="text/css" href="css/twitter.css" />
+    <link href="libs/bootstrap.css" rel="stylesheet">
+    <link href="//cdn.wso2.com/wso2/sites/all/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Cinzel:400,700|Lora:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+
+    <link href="css/wso2-common-styles.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/election-style2.css" rel="stylesheet" type="text/css" media="all" />
+
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o)
+                , m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-75763718-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+
+</head>
+
+<body class="cElection">
+    <div class="cShareButtons">
+        <!--            <a target="_blank" data-text="Check the US Election monitor at" rel="external nofollow" href="https://twitter.com/share?url=https://wso2.com/election2016/&text=&via=wso2" title="Twitter">
+                            <img src="http://b.content.wso2.com/sites/all/2015-june-theme/images/footer-share-btn-twitter.png" alt="Twitter"/>
+                        </a>-->
+        <a target="_blank" rel="external nofollow" href="http://twitter.com/share?text=Check out what the Internet thinks of the election2016! Live!&via=wso2&url=http://wso2.com/election2016/&hashtags=election2016,Watchwithus" title="Twitter">
+            <img src="http://b.content.wso2.com/sites/all/2015-june-theme/images/footer-share-btn-twitter.png" alt="Twitter" />
+        </a>
+
+        <a target="_blank" rel="external nofollow" href="http://www.facebook.com/share.php?u=https://wso2.com/election2016/" title="Share with your friends on Facebook">
+            <img src="http://b.content.wso2.com/sites/all/2015-june-theme/images/footer-share-btn-fb.png" alt="Facebook" />
+        </a>
+        <a target="_blank" rel="external nofollow" href="http://www.linkedin.com/shareArticle?mini=true&url=https://wso2.com/election2016/&summary=&source=https://wso2.com/election2016/" title="Share this post on linkedin">
+            <img src="http://b.content.wso2.com/sites/all/2015-june-theme/images/footer-share-btn-linkedin.png" alt="LinkedIn" />
+        </a>
+    </div>
+    <div class="row cHeader">
+        <div class="container">
+            <div class="col-sm-12 col-md-12">
+                <a href="http://wso2.com"><img src="http://b.content.wso2.com/sites/all/2015-june-theme/navigation/wso2-nav-logo.png" /></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Section -->
+    <div class="cBlackSection container">
+
+        <!-- Main Title -->
+        <div class="col-sm-12 col-md-12 cElectionIntroLeft text-center">
+            <h2>WHAT THE INTERNET THINKS ABOUT</h2>
+            <h1 id="main-title"></h1>
+            <div class="cProductInfo">
+                <div class="col-sm-12 col-md-12 cProductLogoos">
+                    <p>Powered by</p>
+                    <!--                   <a href="//wso2.com/products/complex-event-processor/"><img src="//b.content.wso2.com/sites/all/common/images/product-logos/complex-event-processor.svg"/></a>-->
+                    <a href="//wso2.com/products/data-analytics-server/"><img src="//b.content.wso2.com/sites/all/common/images/product-logos/data-analytics-server.svg"></a>
+                    <a href="//wso2.com/products/enterprise-service-bus/"><img src="//b.content.wso2.com/sites/all/common/images/product-logos/enterprise-service-bus.svg"></a>
+
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 cTermsConditionsText">
+                By using this site you agree to the <a target="_blank" href="http://wso2.com/election2016/terms-and-conditions/">Terms and Conditions</a> stated herein
+            </div>
+        </div>
+        <!-- End Main Title -->
+
+        <!-- Head to Head Section Two-->
+        <div class="row" id="twoHeadToHead">
+            <div class="col-sm-12 col-md-12 cElectionIntroBottom cNewIntro">
+                <h2>IN THE GAME</h2>
+                <!--			<button id="B" class="button button5"  onclick="myFunction()">View History</button>-->
+                <div id="Tgraph" class="gcGraph">
+                    <div id="current">
+                        <!--                        <h4>Accounts talking about them in the past 24 hours</h4>-->
+                        <div class="col-sm-12 col-md-6 cPartyContainer cRepublican current">
+
+                            <h3 class="g1_title"></h3>
+                            <img src="images/group_images/G1_P1.jpg" />
+                            <div class="cNumbers" id="div1"></div>
+                                <div style="margin: 0 auto;">
+                                    <div id="cHashTags1" style="margin: 0 auto; display:table">
+
+                                    </div>
+                                </div>
+                            <div class="cIntroSectionLine">
+                                <!--                         <div class="cDesc">Accounts talking about them in the past 24 hours</div>-->
+                                <!--
+                                <div class="col-sm-12 col-md-12 cTrumpCol">
+                                    <h3 id=g1_p1_main></h3>
+                                    <img src="images/group_images/G1_P1.jpg" />
+                                    <h4> <span id="div11"></span>&nbsp; span id="div31"></span</h4>
+                                    <h5>Most Frequent Hashtags</h5>
+                                </div>
+-->
+                            </div>
+
+                        </div>
+                        <div class="col-sm-12 col-md-6 cPartyContainer cDemocratic">
+                            <h3 class="g2_title"></h3>
+                            <img src="images/group_images/G2_P1.jpg" />
+                            <div class="cNumbers" id="div2"></div>
+                            <!--<div class="cDesc">Accounts talking about them in the past 24 hours</div>-->
+                            <div style="margin: 0 auto;">
+                                    <div id="cHashTags3" style="margin: 0 auto; display:table">
+
+                                    </div>
+                                </div>
+                            <!--
+                            <div class="cIntroSectionLine">
+                                <div class="col-sm-12 col-md-12 cClintonCol">
+                                    <h3 id=g2_p1_main></h3>
+                                    <img src="images/group_images/G2_P1.jpg" />
+                                    <h4> <span id="div21"></span>&nbsp; span id="div41"></span</h4>
+                                    <h5>Most Frequent Hashtags</h5>
+                                </div>
+                            </div>
+-->
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- End Head to Head Section Two -->
+
+        <!-- Head to Head Section-->
+        <div class="row" id="fourHeadToHead">
+            <div class="col-sm-12 col-md-12 cElectionIntroBottom cNewIntro">
+                <h2>IN THE GAME</h2>
+                <!--			<button id="B" class="button button5"  onclick="myFunction()">View History</button>-->
+                <div id="Tgraph" class="gcGraph">
+                    <div id="current">
+                        <!--                        <h4>Accounts talking about them in the past 24 hours</h4>-->
+                        <div class="col-sm-12 col-md-6 cPartyContainer cRepublican current">
+
+                            <h3 class="g1_title"></h3>
+                            <div class="cNumbers" id="div1"></div>
+
+                            <div class="cIntroSectionLine">
+                                <!--                         <div class="cDesc">Accounts talking about them in the past 24 hours</div>-->
+                                <div class="col-sm-12 col-md-6 cTrumpCol">
+                                    <h3 id=g1_p1_main></h3>
+                                    <img src="images/group_images/G1_P1.jpg" />
+                                    <h4> <span id="div11"></span>&nbsp; <!--span id="div31"></span--></h4>
+                                    <h5>Most Frequent Hashtags</h5>
+                                    <div id="cHashTags1">
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6 cCruzCol">
+                                    <h3 id=g1_p2_main></h3>
+                                    <img src="images/group_images/G1_P2.jpg" />
+                                    <h4><span id="div12"></span>&nbsp; <span></span></h4>
+                                    <h5>Most Frequent Hashtags</h5>
+                                    <div id="cHashTags2">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-12 col-md-6 cPartyContainer cDemocratic">
+                            <h3 class="g2_title"></h3>
+                            <div class="cNumbers" id="div2"></div>
+                            <!--                        <div class="cDesc">Accounts talking about them in the past 24 hours</div>-->
+
+                            <div class="cIntroSectionLine">
+                                <div class="col-sm-12 col-md-6 cClintonCol">
+                                    <h3 id=g2_p1_main></h3>
+                                    <img src="images/group_images/G2_P1.jpg" />
+                                    <h4> <span id="div21"></span>&nbsp; <!--span id="div41"></span--></h4>
+                                    <h5>Most Frequent Hashtags</h5>
+                                    <div class="cHashTags" id="cHashTags3">
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6 cBernieCol">
+                                    <h3 id=g2_p2_main></h3>
+                                    <img src="images/group_images/G2_P2.jpg" />
+                                    <h4> <span id="div22"></span>&nbsp; <!--span id="div42"></span--></h4>
+                                    <h5>Most Frequent Hashtags</h5>
+                                    <div class="cHashTags" id="cHashTags4">
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <p class="desc" id="main-description">The Main Description is not set in the configuration file. Please add this.</p>
+        <!-- End Head to Head Section -->
+
+        <hr>
+        <!-- Sentiment Graph Section -->
+        <div class="row">
+            <h2>WHAT THE MEDIA THINKS OF THEM</h2>
+            <div id="graph2" class="cGraph">
+                <img class="cHappy" src="http://b.content.wso2.com/sites/all/us-election/happy-white.svg" />
+                <img class="cSad" src="http://b.content.wso2.com/sites/all/us-election/sad-white.svg" />
+            </div>
+        </div>
+        <div class="cNewsBar" id="newsTicker">
+            <!--<h3>News</h3>-->
+            <!--<img src=""/>-->
+            <div class="col-sm-12 col-md-12">
+                <ul id="nt-example1"></ul>
+            </div>
+        </div>
+        <p class="desc" id="sentiment-description">The Sentiment Description is not set in the configuration file. Please add this.</p>
+        <br>
+        <!-- End Sentiment Graph Section -->
+        <hr>
+        <!-- Graph Section -->
+        <div class="row">
+            <h2>THE ATTENTION THEY'RE GETTING ON TWITTER, MAPPED OUT</h2>
+            <div class="col-sm-12 col-md-12">
+
+                <div class="community-graph-legend-container">
+                    <ul class="community-graph-legend">
+                        <li><i class="fw fw-circle text-color1" id="li-name1">&nbsp;Trump</i> </li>
+                        <li><i class="fw fw-circle text-color4" id="li-name2">&nbsp;Bernie</i></li>
+                        <li><i class="fw fw-circle text-color3" id="li-name3">&nbsp;Clinton</i></li>
+                        <li><i class="fw fw-circle text-color2" id="li-name4">&nbsp;Cruz</i> </li>
+
+                    </ul>
+                </div>
+                <!--                <div id="communityGraph" class="cGraph"></div>-->
+                <div align="center" id="circle"></div>
+                <script>
+                    setTimeout(function () {
+                        var txt = getGraph();
+                        drawGraph(txt);
+                    }, 1000);
+                </script>
+                <br>
+
+            </div>
+
+
+        </div>
+        <!-- End Graph Section -->
+        <hr>
+        <!-- Word Cloud Section -->
+        <div class="row">
+            <div class="container text-center">
+                <h2>WHAT PEOPLE ARE TALKING ABOUT</h2>
+                <p class="desc">We know what the candidates are saying - what do their supporters talk about? The following word clouds show the most used words in each of these micro-communities.<a href="https://wso2.com/election2016/blog/#real-time-word-clouds" target="_blank"> Click here</a> to read how we sort tweeps into these communities and extract these words.</p>
+                <div class="cWorCloud">
+                    <h3 style="text-align: center;"><span id="g1_titleWC" style="color: rgba(190, 6, 13, 1);"></span> vs <span id="g2_titleWC" style="color: rgba(30, 38, 114, 1);"></span></h3>
+                    <div id="T1">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="cTRUMPCOMMUNITYContainer">
+                                <!--                            <h4>TRUMP's COMMUNITY </h4>-->
+                                <div class="cCandidateImage"><img src="images/group_images/G1_P1.jpg"></div>
+                                <div class="cWordCloud WCcontainer" id="WCR1"></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="cCLINTONCOMMUNITYContainer">
+                                <!--                            <h4>CLINTON's COMMUNITY</h4>-->
+                                <div class="cCandidateImage"><img src="images/group_images/G2_P1.jpg"></div>
+                                <div class="cWordCloud WCcontainer" id="WCD1"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="T2">
+                        <div class="col-sm-12 col-md-6">
+                            <!--div class="cCRUZCOMMUNITYContainer">
+                                                           <h4>CRUZ's COMMUNITY</h4>
+                                <div class="cCandidateImage"></div>
+                                <div class="cWordCloud WCcontainer" id="WCR2"></div>
+                            </div-->
+                            <div class="cCRUZCOMMUNITYContainer">
+                                <!--                            <h4>CLINTON's COMMUNITY</h4>-->
+                                <div class="cCandidateImage"><img src="images/group_images/G1_P2.jpg"></div>
+                                <div class="cWordCloud WCcontainer" id="WCR2"></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 ">
+                            <div class="cBERNIECOMMUNITYContainer">
+                                <!--                            <h4>BERNIE's COMMUNITY</h4>-->
+                                <div class="cCandidateImage"><img src="images/group_images/G2_P2.jpg"></div>
+                                <div class="cWordCloud WCcontainer" id="WCD2"></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!--                    <h3 style="text-align: center;"><span style="color: rgba(190, 6, 13, 1);">Republicans</span> vs <span style="color: rgba(30, 38, 114, 1);">Democrats</span></h3>-->
+
+                    <!--
+                    <div id="T2">
+                        <div>
+                            <div class="cBERNIECOMMUNITYContainer col-md-12">
+                                   <div class="cCandidateImage trump col-xs-4"><img src="//b.content.wso2.com/sites/all/us-election/Trump.jpg"></div>
+                                <div class="cCandidateImage clinton col-xs-4"><img src="//b.content.wso2.com/sites/all/us-election/Hillary.jpg"></div>
+                                <div class="cCandidateImage bernie col-xs-4"><img src="//b.content.wso2.com/sites/all/us-election/Bernie.jpg"></div>
+
+                                <div id="cHashTags1" class="col-md-10 cHashTagWordCloud">
+
+                                    <span>#Election2016</span>
+                                    <span>#Decision2016</span>
+                                    <span>#Republicans</span>
+                                    <span>#Democrats</span>
+                                    <span>#GOP</span>
+                                    <span>#democrat</span>
+                                    <span>#republican</span>
+                                    <span>#vote</span>
+                                    <span>#Trump2016</span>
+                                    <span>#Trump</span>
+                                    <span>#NeverHillary</span>
+                                    <span>#DonaldTrump</span>
+                                    <span>#TrumpTrain</span>
+                                    <span>#Hillary</span>
+                                    <span>#NoTrumpAnytime</span>
+                                    <span>#HillaryClinton</span>
+                                    <span>#NeverTrump</span>
+                                    <span>#Clinton</span>
+                                    <span>#ImWithHer</span>
+                                    <span>#Hillary2016</span>
+                                    <span>#FeelTheBern</span>
+                                    <span>#BernieSanders</span>
+                                    <span>#Bernie2016</span>
+                                    <span>#BernieOrBust</span>
+
+                                </div>
+                                <div class="col-md-2">
+                                    <ul class="community-graph-legend" style="text-align: left;">
+                                        <li><i class="fw fw-circle text-color1" id="li-name1">&nbsp;Trump</i> </li>
+                                        <li><i class="fw fw-circle text-color2" id="li-name2">&nbsp;Bernie</i></li>
+                                        <li><i class="fw fw-circle text-color3" id="li-name3">&nbsp;Clinton</i> </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-12 col-md-12">
+                                <div class="cWordCloud WCcontainer" id="CommonCloud"></div>
+                            </div>
+
+                        </div>
+                    </div>
+-->
+                    <!--
+<p>
+    Note: John Kasich is not displayed here because Twitter activity on his hashtags is quite low relative to the rest of the candidates.This leads to his tweetspace being ignored by most of the algorithms.</p>-->
+
+                </div>
+            </div>
+            <!-- End Word Cloud Section -->
+            <hr>
+            <!-- Twitter Section-->
+            <div class="row">
+                <div class="container text-center">
+                    <h2>THE MOST POPULAR TWEETS</h2>
+
+                    <div class="cNewTwitterFeed">
+                        <div class="col-sm-12 col-md-12">
+                            <div class="cTwitterCol">
+                                <!--
+                            <div class="cTitle">Popular from #uselection2016</div>
+                            <div class="cArrow"><img src="http://b.content.wso2.com/sites/all/us-election/down.svg" /></div>
+-->
+                                <ul id="nt-popularElection"></ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+
+            <!--
+        <div class="row">
+            <div class="container text-center">
+                <h2>THE MOST POPULAR TWEETS</h2>
+                
+                <p>Every second, the WSO2 ESB collects tweets related to the US Election and the candidates running in it. As of the time of writing, that’s around 10 tweets a second - close to 0.8 million tweets a day. But which of these tweets are the most important right now? By considering the number of retweets and favourites a tweet earns, as well as its age, we’ve set up a system that ranks tweets according to popularity and slowly phases them out as they get older - most tweets are gone completely within 8 hours. This creates a list of the current top tweets in the election space. <a target="_blank" href="http://wso2.com/election2016/blog/">Click here</a> to read how this algorithm works.
+</p>
+
+                <div class="cNewTwitterFeed">
+                    <div class="col-sm-12 col-md-12">
+                        <div class="cTwitterCol">
+                           
+                            <div class="cTitle">Popular from #uselection2016</div>
+                            <div class="cArrow"><img src="http://b.content.wso2.com/sites/all/us-election/down.svg" /></div>
+
+                            <ul id="nt-popularElection"></ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+-->
+            <div class="row">
+                <div class="container text-center">
+                    <h2>THE MOST POPULAR LINKS BEING SHARED</h2>
+                    <!--
+                <p>Every second, the WSO2 ESB collects tweets related to the US Election and the candidates running in it. As of the time of writing, that’s around 10 tweets a second - close to 0.8 million tweets a day. But which of these tweets are the most important right now? By considering the number of retweets and favourites a tweet earns, as well as its age, we’ve set up a system that ranks tweets according to popularity and slowly phases them out as they get older - most tweets are gone completely within 8 hours. This creates a list of the current top tweets in the election space. <a target="_blank" href="http://wso2.com/election2016/blog/">Click here</a> to read how this algorithm works.
+</p>
+-->
+
+                    <div class="cNewTwitterFeed">
+                        <div class="col-sm-12 col-md-12">
+                            <div class="cTwitterCol">
+                                <!--
+                            <div class="cTitle">Popular from #uselection2016</div>
+                            <div class="cArrow"><img src="http://b.content.wso2.com/sites/all/us-election/down.svg" /></div>
+-->
+                                <ul id="nt-popularLink"></ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Twitter Section-->
+        </div>
+        <!-- End Main Section -->
+    </div>
+
+
+    <div id="scrolllimit"></div>
+
+
+
+    <div class="row cFooter">
+        <div class="container">
+            <div class="col-sm-12 col-md-10 cFooterImage">
+                <a href="http://wso2.com/"><img src="http://b.content.wso2.com/sites/all/themes/wso2-v6/images/new-home/home-footer-logo.png" /></a>
+            </div>
+            <!--
+            <div class="col-sm-12 col-md-9 cFooterText">
+                By using this site you agree to the <a target="_blank" href="http://wso2.com/election2016/terms-and-conditions/">Terms and Conditions</a> stated herein
+            </div>
+  -->
+            <div class="col-sm-12 col-md-2 cFooterText">
+                © 2016 WSO2
+
+                <a style="display: none;" href="http://twitter.com/share?url=http://wso2.com/election2016/&text=<TEXT>via=<USERNAME>"></a>
+
+                <a style="display: none;" href="https://twitter.com/share?
+                       url=http://wso2.com/election2016/&
+                       via=wso2&
+                       hashtags=Watchwithus&
+                       text=Check out what the Internet thinks of the #election2016! Live">
+
+                        Twitter
+                    </a>
+
+                <a style="display: none;" href=" http://twitter.com/share?text=Check out what the Internet thinks of the election2016! Live!&via=wso2&url=http://wso2.com/election2016/&hashtags=election2016,Watchwithus">x</a>
+
+            </div>
+        </div>
+    </div>
+    <!-- /container -->
+    <script type="text/javascript">
+        var nt_example1 = $("#nt-example1").newsTicker({
+            row_height: 120
+            , max_rows: 1
+            , duration: 4000
+            , prevButton: $('#nt-example1-prev')
+            , nextButton: $('#nt-example1-next')
+        })(jQuery);
+    </script>
+
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="libs/bootstrap_3.3.5/js/bootstrap.min.js"></script>
+    <script src="js/jquery.bootstrap-dropdown-hover.js"></script>
+    <!--d3 library-->
+    <script src="js/d3/d3.min.js"></script>
+    <script src="js/d3/d3.v3.js"></script>
+    <script src="js/d3/graphlib-dot.js"></script>
+    <script src="js/d3/dagre-d3.js"></script>
+    <script src="js/d3.tip.v0.6.3.js"></script>
+    <script src="js/vega.js"></script>
+    <script src="js/VizGrammar.js"></script>
+    <!-- sub JS functions -->
+    <script src="js/PopularList.js"></script>
+    <!--script src="js/renderCommunityGraph.js"></script-->
+    <script src="js/candidateCloud.js"></script>
+    <script src="js/communityGraph.js"></script>
+    <script src="js/main.js"></script>
+
+
+    <script src="js/application-data.js"></script>
+    <script type="text/javascript">
+        readApplicationData();
+    </script>
+</body>
+
+</html>
