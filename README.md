@@ -1,4 +1,11 @@
-# general-twitter-analytics
+# General Twitter Analytics
+
+General Twitter Analytics allows you to set up a real-time tracker for Twitter. You can collect tweets around hashtags and conduct custom analyses on them - such as visualize tweet content via word clouds or examinining communities via Force-based layouts. General Twitter Analytics is built with WSO2 Enterprise Service Bus and WSO2 Data Analytics Server. Real-time analysis can be conducted via WSO2 Siddhi. It is recommended that your familiarize yourself with these products before continuing.
+
+WSO2 ESB documentation is available here:  https://docs.wso2.com/display/ESB481/WSO2+Enterprise+Service+Bus+Documentation
+WSO2 DAS documentation is available here:  https://docs.wso2.com/display/DAS300/WSO2+Data+Analytics+Server+Documentation
+
+# Setup instructions
 
 **1. Configure DB**  
     1.1 Download this repository and navigate to _database/_ folder and find _twitterAnalytics_db.sql_ file  
@@ -14,7 +21,7 @@
  	1.5 Import Databases using following commands   
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`mysql -u [username] -p[password]  twitter_analytics_db < twitterAnalytics_db.sql` 
 
-**2. Download required wso2 products**   
+**2. Download base WSO2 products**   
 	 2.1 Download WSO2 Enterprise Service Bus 4.9.0 from http://wso2.com/products/enterprise-service-bus/ and extract.  
 	 2.2 Download WSO2 Data Analytic Server 3.1.0 from http://wso2.com/products/data-analytics-server/ and extract.  
 	 2.3 Open _DAS_HOME/repository/conf/carbon.xml_ and change the offset of the server to 7 by replacing line relevant line with `<offset>7<offset>`  
